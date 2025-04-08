@@ -22,17 +22,29 @@ code_clipboard: false
 
 meta:
   - name: description
-    content: Documentacion de Kashpay API
+    content: Documentacion de Kashpay APIS
 ---
 
 # Introduccion
 
-Bienvenidos a la API de Kashpay, donde encontraras servicios web para uso de las APIS  que conforman el entorno Kashpay. 
+Bienvenidos a la documentacion de las APIS de Kashpay, donde encontraras los servicios web para uso de las mismas que conforman nuestros desarrollos. 
+
+Las APIS que conforman el entorno Kashpay son:
+
+<ul>
+  <li>API AUTENTICACION</li>
+  <li>API ADQUIRENCIA</li>
+  <li>API EMISION</li>
+  <li>API OKPAY</li>
+  <li>API ENTITIES</li>
+  <li>API CARD</li>
+</ul>
 
 Nuestros servicios estan diseñados con la estructura RESTful. Los request y response se presentan en  formato JSON.
 
-Para poder hacer uso de los siguientes servicios, es necesario llenar el siguiente  formulario para poder registrarlo en nuestro sistema y generar credenciales de  operación. 
-
+<aside class="notice">
+Si tiene alguna duda específica con el desarrollo o la integración, puede enviar un correo electrónico a soporte@onsigna.com y a través del canal de soporte responderemos a sus solicitudes. 
+</aside>
 
 
 
@@ -1391,34 +1403,146 @@ type (Tipo de operación, ver catalogo de operaciones) | Default value : 1
 
 # API CardServices
 
-## Inicia
+## addToken <span style="float: right; color:#0f70ec;font-size: 9px;">POST</span>
 
-Valida las credenciales para acceder en la app wallet, permite o deniega el acceso. Una vez que los accesos sean correctos, dicho servicio devuelve los saldos  asignados, así como el estatus, información y la tarjeta asociada a la cuenta. 
+Este punto final tiene como propósito generar un token único asociado a una tarjeta, utilizando para ello tanto los datos explícitos de la tarjeta como la información del titular de la misma.
 
+El token generado es un valor alfanumérico irrepetible que puede emplearse como identificador en el punto final dedicado a la tokenización de cargos. Es importante destacar que el token actúa como un sustituto seguro de los datos
+confidenciales de la tarjeta, proporcionando una capa adicional de protección en las transacciones. 
+
+<aside class="success">
+Recuerda — Que el token generado sea almacenado de manera segura, siguiendo las mejores prácticas de seguridad y cumplimiento normativo para evitar cualquier acceso no autorizado o uso indebido.
+</aside>
 
 ```java
 // JAVA - Unirest
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add")
+  .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg")
+  .header("Entity-i", "com.onsigna")
+  .header("Content-Type", "application/json")
+  .body("{\n    \"name\": \"Alejandro Rosas T.\",\n    \"card\": \"4152313702741790\",\n    \"expirationDate\": \"06-2029\",\n    \"identifier\": \"SUB165\",\n    \"address\": \"Farenheit\",\n    \"city\": \"Querétaro\",\n    \"locality\": \"Las Palmas\",\n    \"postalCode\": \"90000\",\n    \"email\": \"alerot@gmail.com\",\n    \"phoneNumber\": \"6526543734\"\n}")
+  .asString();
+
 ```
 
 ```php
 // PHP - cURL
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>'{
+    "name": "Alejandro Rosas T.",
+    "card": "4152313702741790",
+    "expirationDate": "06-2029",
+    "identifier": "SUB165",
+    "address": "Farenheit",
+    "city": "Querétaro",
+    "locality": "Las Palmas",
+    "postalCode": "90000",
+    "email": "alerot@gmail.com",
+    "phoneNumber": "6526543734"
+}',
+  CURLOPT_HTTPHEADER => array(
+    'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg',
+    'Entity-i: com.onsigna',
+    'Content-Type: application/json'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+
 ```
 
 ```ruby
 # RUBY - Net::HTTP
+require "uri"
+require "json"
+require "net/http"
 
+url = URI("http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg"
+request["Entity-i"] = "com.onsigna"
+request["Content-Type"] = "application/json"
+request.body = JSON.dump({
+  "name": "Alejandro Rosas T.",
+  "card": "4152313702741790",
+  "expirationDate": "06-2029",
+  "identifier": "SUB165",
+  "address": "Farenheit",
+  "city": "Querétaro",
+  "locality": "Las Palmas",
+  "postalCode": "90000",
+  "email": "alerot@gmail.com",
+  "phoneNumber": "6526543734"
+})
+
+response = http.request(request)
+puts response.read_body
 
 ```
 
 ```python
 # PYTHON - http.client
+import http.client
+import json
 
+conn = http.client.HTTPConnection("sdbx-antares.kashplataforma.com", 7071)
+payload = json.dumps({
+  "name": "Alejandro Rosas T.",
+  "card": "4152313702741790",
+  "expirationDate": "06-2029",
+  "identifier": "SUB165",
+  "address": "Farenheit",
+  "city": "Querétaro",
+  "locality": "Las Palmas",
+  "postalCode": "90000",
+  "email": "alerot@gmail.com",
+  "phoneNumber": "6526543734"
+})
+headers = {
+  'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg',
+  'Entity-i': 'com.onsigna',
+  'Content-Type': 'application/json'
+}
+conn.request("POST", "/CardServices/api/v1/cardToken/add", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
 
 ```
 
 ```shell
 # SHELL - httpie
-
+printf '{
+    "name": "Alejandro Rosas T.",
+    "card": "4152313702741790",
+    "expirationDate": "06-2029",
+    "identifier": "SUB165",
+    "address": "Farenheit",
+    "city": "Querétaro",
+    "locality": "Las Palmas",
+    "postalCode": "90000",
+    "email": "alerot@gmail.com",
+    "phoneNumber": "6526543734"
+}'| http  --follow --timeout 3600 POST 'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add' \
+ Authorization:'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg' \
+ Entity-i:'com.onsigna' \
+ Content-Type:'application/json'
 
 ```
 
@@ -1426,20 +1550,219 @@ Valida las credenciales para acceder en la app wallet, permite o deniega el acce
 > El codigo anterior devuelve un JSON estructurado así:
 
 ```json
-
+{
+    "success": true,
+    "cardDetail": {
+        "id": 61,
+        "card": "**1790",
+        "institution": "Unknown",
+        "brand": "Mastercard Standard",
+        "active": true,
+        "cardToken": "862621D24D4A9A739E9D715DE44A4259"
+    }
+}
 ```
 
 This endpoint retrieves all kittens.
 
 ### HTTP Request
 
-`POST http://sdbx-aldebaran.kashplataforma.com/aldbrn/internal/aw/login`
+`POST http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add`
 
 ### Query Parameters
 
 Parameter | Description
 --------- | -----------
-user | Usuario
-mail | Correo electronico
-password | Clave asignada 
+name | Nombre
+card | Numero de tarjeta
+expirationDate | expiracion
+identifier | idsirio
+address | direccion
+city | Querétaro
+locality | Las Palmas
+postalCode | 90000
+email | test@test.com
+phoneNumber | 6526543734
+
+## addToken <span style="float: right; color:#0f70ec;font-size: 9px;">POST</span>
+
+Este punto final tiene como propósito generar un token único asociado a una tarjeta, utilizando para ello tanto los datos explícitos de la tarjeta como la información del titular de la misma.
+
+El token generado es un valor alfanumérico irrepetible que puede emplearse como identificador en el punto final dedicado a la tokenización de cargos. Es importante destacar que el token actúa como un sustituto seguro de los datos
+confidenciales de la tarjeta, proporcionando una capa adicional de protección en las transacciones. 
+
+<aside class="success">
+Recuerda — Que el token generado sea almacenado de manera segura, siguiendo las mejores prácticas de seguridad y cumplimiento normativo para evitar cualquier acceso no autorizado o uso indebido.
+</aside>
+
+```java
+// JAVA - Unirest
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add")
+  .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg")
+  .header("Entity-i", "com.onsigna")
+  .header("Content-Type", "application/json")
+  .body("{\n    \"name\": \"Alejandro Rosas T.\",\n    \"card\": \"4152313702741790\",\n    \"expirationDate\": \"06-2029\",\n    \"identifier\": \"SUB165\",\n    \"address\": \"Farenheit\",\n    \"city\": \"Querétaro\",\n    \"locality\": \"Las Palmas\",\n    \"postalCode\": \"90000\",\n    \"email\": \"alerot@gmail.com\",\n    \"phoneNumber\": \"6526543734\"\n}")
+  .asString();
+
+```
+
+```php
+// PHP - cURL
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>'{
+    "name": "Alejandro Rosas T.",
+    "card": "4152313702741790",
+    "expirationDate": "06-2029",
+    "identifier": "SUB165",
+    "address": "Farenheit",
+    "city": "Querétaro",
+    "locality": "Las Palmas",
+    "postalCode": "90000",
+    "email": "alerot@gmail.com",
+    "phoneNumber": "6526543734"
+}',
+  CURLOPT_HTTPHEADER => array(
+    'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg',
+    'Entity-i: com.onsigna',
+    'Content-Type: application/json'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+
+```
+
+```ruby
+# RUBY - Net::HTTP
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg"
+request["Entity-i"] = "com.onsigna"
+request["Content-Type"] = "application/json"
+request.body = JSON.dump({
+  "name": "Alejandro Rosas T.",
+  "card": "4152313702741790",
+  "expirationDate": "06-2029",
+  "identifier": "SUB165",
+  "address": "Farenheit",
+  "city": "Querétaro",
+  "locality": "Las Palmas",
+  "postalCode": "90000",
+  "email": "alerot@gmail.com",
+  "phoneNumber": "6526543734"
+})
+
+response = http.request(request)
+puts response.read_body
+
+```
+
+```python
+# PYTHON - http.client
+import http.client
+import json
+
+conn = http.client.HTTPConnection("sdbx-antares.kashplataforma.com", 7071)
+payload = json.dumps({
+  "name": "Alejandro Rosas T.",
+  "card": "4152313702741790",
+  "expirationDate": "06-2029",
+  "identifier": "SUB165",
+  "address": "Farenheit",
+  "city": "Querétaro",
+  "locality": "Las Palmas",
+  "postalCode": "90000",
+  "email": "alerot@gmail.com",
+  "phoneNumber": "6526543734"
+})
+headers = {
+  'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg',
+  'Entity-i': 'com.onsigna',
+  'Content-Type': 'application/json'
+}
+conn.request("POST", "/CardServices/api/v1/cardToken/add", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
+
+```
+
+```shell
+# SHELL - httpie
+printf '{
+    "name": "Alejandro Rosas T.",
+    "card": "4152313702741790",
+    "expirationDate": "06-2029",
+    "identifier": "SUB165",
+    "address": "Farenheit",
+    "city": "Querétaro",
+    "locality": "Las Palmas",
+    "postalCode": "90000",
+    "email": "alerot@gmail.com",
+    "phoneNumber": "6526543734"
+}'| http  --follow --timeout 3600 POST 'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add' \
+ Authorization:'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg' \
+ Entity-i:'com.onsigna' \
+ Content-Type:'application/json'
+
+```
+
+
+> El codigo anterior devuelve un JSON estructurado así:
+
+```json
+{
+    "success": true,
+    "cardDetail": {
+        "id": 61,
+        "card": "**1790",
+        "institution": "Unknown",
+        "brand": "Mastercard Standard",
+        "active": true,
+        "cardToken": "862621D24D4A9A739E9D715DE44A4259"
+    }
+}
+```
+
+This endpoint retrieves all kittens.
+
+### HTTP Request
+
+`POST http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+name | Nombre
+card | Numero de tarjeta
+expirationDate | expiracion
+identifier | idsirio
+address | direccion
+city | Querétaro
+locality | Las Palmas
+postalCode | 90000
+email | test@test.com
+phoneNumber | 6526543734
+
 
