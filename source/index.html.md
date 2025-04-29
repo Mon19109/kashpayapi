@@ -700,7 +700,7 @@ printf '{
 
 ### HTTP Request
 
-`http://sdbx-sirio.kashplataforma.com/EntitiesServices/addEntity`
+`POST http://sdbx-sirio.kashplataforma.com/EntitiesServices/addEntity`
 
 ### Query Parameters
 
@@ -839,7 +839,7 @@ http --follow --timeout 3600 GET 'http://sdbx-sirio.kashplataforma.com/EntitiesS
 
 ### HTTP Request
 
-`GET   -   http://sdbx-aldebaran.kashplataforma.com/aldbrn/internal/aw/login`
+`GET http://sdbx-sirio.kashplataforma.com/EntitiesServices/getBalance`
 
 ### Query Parameters
 
@@ -850,7 +850,7 @@ Entity ( entidad Maestra) | Default value : com.example
 
 
 
-## getOperations
+## getOperations <span style="float: right; color:#029702;font-size: 9px;">GET</span>
 
 Servicio para obtener operaciones a nivel cuenta de la Entidad/Subentidad asociada a la entidad maestra 
 
@@ -1345,7 +1345,7 @@ This endpoint retrieves all kittens.
 
 ### HTTP Request
 
-`POST http://sdbx-aldebaran.kashplataforma.com/aldbrn/internal/aw/login`
+`GET http://sdbx-sirio.kashplataforma.com/EntitiesServices/getOperations`
 
 ### Query Parameters
 
@@ -1584,7 +1584,7 @@ postalCode | 90000
 email | test@test.com
 phoneNumber | 6526543734
 
-## addToken <span style="float: right; color:#0f70ec;font-size: 9px;">POST</span>
+## getToken <span style="float: right; color:#029702;font-size: 9px;">GET</span>
 
 Este punto final tiene como propósito generar un token único asociado a una tarjeta, utilizando para ello tanto los datos explícitos de la tarjeta como la información del titular de la misma.
 
@@ -1598,11 +1598,9 @@ Recuerda — Que el token generado sea almacenado de manera segura, siguiendo la
 ```java
 // JAVA - Unirest
 Unirest.setTimeouts(0, 0);
-HttpResponse<String> response = Unirest.post("http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add")
+HttpResponse<String> response = Unirest.get("http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165")
   .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg")
   .header("Entity-i", "com.onsigna")
-  .header("Content-Type", "application/json")
-  .body("{\n    \"name\": \"Alejandro Rosas T.\",\n    \"card\": \"4152313702741790\",\n    \"expirationDate\": \"06-2029\",\n    \"identifier\": \"SUB165\",\n    \"address\": \"Farenheit\",\n    \"city\": \"Querétaro\",\n    \"locality\": \"Las Palmas\",\n    \"postalCode\": \"90000\",\n    \"email\": \"alerot@gmail.com\",\n    \"phoneNumber\": \"6526543734\"\n}")
   .asString();
 
 ```
@@ -1612,30 +1610,17 @@ HttpResponse<String> response = Unirest.post("http://sdbx-antares.kashplataforma
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add',
+  CURLOPT_URL => 'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
   CURLOPT_TIMEOUT => 0,
   CURLOPT_FOLLOWLOCATION => true,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'POST',
-  CURLOPT_POSTFIELDS =>'{
-    "name": "Alejandro Rosas T.",
-    "card": "4152313702741790",
-    "expirationDate": "06-2029",
-    "identifier": "SUB165",
-    "address": "Farenheit",
-    "city": "Querétaro",
-    "locality": "Las Palmas",
-    "postalCode": "90000",
-    "email": "alerot@gmail.com",
-    "phoneNumber": "6526543734"
-}',
+  CURLOPT_CUSTOMREQUEST => 'GET',
   CURLOPT_HTTPHEADER => array(
     'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg',
-    'Entity-i: com.onsigna',
-    'Content-Type: application/json'
+    'Entity-i: com.onsigna'
   ),
 ));
 
@@ -1649,28 +1634,14 @@ echo $response;
 ```ruby
 # RUBY - Net::HTTP
 require "uri"
-require "json"
 require "net/http"
 
-url = URI("http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add")
+url = URI("http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165")
 
 http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Post.new(url)
+request = Net::HTTP::Get.new(url)
 request["Authorization"] = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg"
 request["Entity-i"] = "com.onsigna"
-request["Content-Type"] = "application/json"
-request.body = JSON.dump({
-  "name": "Alejandro Rosas T.",
-  "card": "4152313702741790",
-  "expirationDate": "06-2029",
-  "identifier": "SUB165",
-  "address": "Farenheit",
-  "city": "Querétaro",
-  "locality": "Las Palmas",
-  "postalCode": "90000",
-  "email": "alerot@gmail.com",
-  "phoneNumber": "6526543734"
-})
 
 response = http.request(request)
 puts response.read_body
@@ -1680,27 +1651,14 @@ puts response.read_body
 ```python
 # PYTHON - http.client
 import http.client
-import json
 
 conn = http.client.HTTPConnection("sdbx-antares.kashplataforma.com", 7071)
-payload = json.dumps({
-  "name": "Alejandro Rosas T.",
-  "card": "4152313702741790",
-  "expirationDate": "06-2029",
-  "identifier": "SUB165",
-  "address": "Farenheit",
-  "city": "Querétaro",
-  "locality": "Las Palmas",
-  "postalCode": "90000",
-  "email": "alerot@gmail.com",
-  "phoneNumber": "6526543734"
-})
+payload = ''
 headers = {
   'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg',
-  'Entity-i': 'com.onsigna',
-  'Content-Type': 'application/json'
+  'Entity-i': 'com.onsigna'
 }
-conn.request("POST", "/CardServices/api/v1/cardToken/add", payload, headers)
+conn.request("GET", "/CardServices/api/v1/cardToken/getTokens?identifier=SUB165", payload, headers)
 res = conn.getresponse()
 data = res.read()
 print(data.decode("utf-8"))
@@ -1709,21 +1667,9 @@ print(data.decode("utf-8"))
 
 ```shell
 # SHELL - httpie
-printf '{
-    "name": "Alejandro Rosas T.",
-    "card": "4152313702741790",
-    "expirationDate": "06-2029",
-    "identifier": "SUB165",
-    "address": "Farenheit",
-    "city": "Querétaro",
-    "locality": "Las Palmas",
-    "postalCode": "90000",
-    "email": "alerot@gmail.com",
-    "phoneNumber": "6526543734"
-}'| http  --follow --timeout 3600 POST 'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add' \
+http --follow --timeout 3600 GET 'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165' \
  Authorization:'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg' \
- Entity-i:'com.onsigna' \
- Content-Type:'application/json'
+ Entity-i:'com.onsigna'
 
 ```
 
@@ -1731,9 +1677,32 @@ printf '{
 > El codigo anterior devuelve un JSON estructurado así:
 
 ```json
-{
-    "success": true,
-    "cardDetail": {
+[
+    {
+        "id": 33,
+        "card": "**7467",
+        "institution": "HSBC",
+        "brand": "VISA",
+        "active": true,
+        "cardToken": "A72F9C3E4D82B6F95EA1678D12BF328F"
+    },
+    {
+        "id": 36,
+        "card": "**1864",
+        "institution": "BBVA BANCOMER",
+        "brand": "VISA",
+        "active": true,
+        "cardToken": "C13D8E6F29B47A5FD921C7A6E35DF984"
+    },
+    {
+        "id": 60,
+        "card": "**1790",
+        "institution": "BBVA BANCOMER",
+        "brand": "VISA",
+        "active": true,
+        "cardToken": "15ABB7F2A5118BFCE65EF19DEADA91C5"
+    },
+    {
         "id": 61,
         "card": "**1790",
         "institution": "Unknown",
@@ -1741,28 +1710,162 @@ printf '{
         "active": true,
         "cardToken": "862621D24D4A9A739E9D715DE44A4259"
     }
-}
+]
 ```
 
 This endpoint retrieves all kittens.
 
 ### HTTP Request
 
-`POST http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add`
+`GET http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165`
 
 ### Query Parameters
 
 Parameter | Description
 --------- | -----------
-name | Nombre
-card | Numero de tarjeta
-expirationDate | expiracion
-identifier | idsirio
-address | direccion
-city | Querétaro
-locality | Las Palmas
-postalCode | 90000
-email | test@test.com
-phoneNumber | 6526543734
+Authorization | Default value : Bearer token
+Entity ( entidad Maestra) | Default value : com.example
 
+
+## getTokenDetail <span style="float: right; color:#029702;font-size: 9px;">GET</span>
+
+Este punto final tiene como propósito generar un token único asociado a una tarjeta, utilizando para ello tanto los datos explícitos de la tarjeta como la información del titular de la misma.
+
+El token generado es un valor alfanumérico irrepetible que puede emplearse como identificador en el punto final dedicado a la tokenización de cargos. Es importante destacar que el token actúa como un sustituto seguro de los datos
+confidenciales de la tarjeta, proporcionando una capa adicional de protección en las transacciones. 
+
+<aside class="success">
+Recuerda — Que el token generado sea almacenado de manera segura, siguiendo las mejores prácticas de seguridad y cumplimiento normativo para evitar cualquier acceso no autorizado o uso indebido.
+</aside>
+
+```java
+// JAVA - Unirest
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.get("http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165")
+  .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg")
+  .header("Entity-i", "com.onsigna")
+  .asString();
+
+```
+
+```php
+// PHP - cURL
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+  CURLOPT_HTTPHEADER => array(
+    'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg',
+    'Entity-i: com.onsigna'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+
+```
+
+```ruby
+# RUBY - Net::HTTP
+require "uri"
+require "net/http"
+
+url = URI("http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Get.new(url)
+request["Authorization"] = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg"
+request["Entity-i"] = "com.onsigna"
+
+response = http.request(request)
+puts response.read_body
+
+```
+
+```python
+# PYTHON - http.client
+import http.client
+
+conn = http.client.HTTPConnection("sdbx-antares.kashplataforma.com", 7071)
+payload = ''
+headers = {
+  'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg',
+  'Entity-i': 'com.onsigna'
+}
+conn.request("GET", "/CardServices/api/v1/cardToken/getTokens?identifier=SUB165", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
+
+```
+
+```shell
+# SHELL - httpie
+http --follow --timeout 3600 GET 'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165' \
+ Authorization:'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg' \
+ Entity-i:'com.onsigna'
+
+```
+
+
+> El codigo anterior devuelve un JSON estructurado así:
+
+```json
+[
+    {
+        "id": 33,
+        "card": "**7467",
+        "institution": "HSBC",
+        "brand": "VISA",
+        "active": true,
+        "cardToken": "A72F9C3E4D82B6F95EA1678D12BF328F"
+    },
+    {
+        "id": 36,
+        "card": "**1864",
+        "institution": "BBVA BANCOMER",
+        "brand": "VISA",
+        "active": true,
+        "cardToken": "C13D8E6F29B47A5FD921C7A6E35DF984"
+    },
+    {
+        "id": 60,
+        "card": "**1790",
+        "institution": "BBVA BANCOMER",
+        "brand": "VISA",
+        "active": true,
+        "cardToken": "15ABB7F2A5118BFCE65EF19DEADA91C5"
+    },
+    {
+        "id": 61,
+        "card": "**1790",
+        "institution": "Unknown",
+        "brand": "Mastercard Standard",
+        "active": true,
+        "cardToken": "862621D24D4A9A739E9D715DE44A4259"
+    }
+]
+```
+
+This endpoint retrieves all kittens.
+
+### HTTP Request
+
+`GET http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Default value : Bearer token
+Entity ( entidad Maestra) | Default value : com.example
 

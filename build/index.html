@@ -8,7 +8,7 @@
     <link href="images/favicon-8a0d5f58.png" rel="icon" type="image/png" />
         <meta
             name="description"
-            content="Documentacion de Kashpay API"
+            content="Documentacion de Kashpay APIS"
         >
     <title>API Kashpay</title>
 
@@ -357,7 +357,7 @@
                     <a href="#getbalance-get" class="toc-h2 toc-link" data-title="getBalance GET">getBalance <span style="float: right; color:#029702;font-size: 9px;">GET</span></a>
                   </li>
                   <li>
-                    <a href="#getoperations" class="toc-h2 toc-link" data-title="getOperations">getOperations</a>
+                    <a href="#getoperations-get" class="toc-h2 toc-link" data-title="getOperations GET">getOperations <span style="float: right; color:#029702;font-size: 9px;">GET</span></a>
                   </li>
               </ul>
           </li>
@@ -365,7 +365,13 @@
             <a href="#api-cardservices" class="toc-h1 toc-link" data-title="API CardServices">API CardServices</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#inicia" class="toc-h2 toc-link" data-title="Inicia">Inicia</a>
+                    <a href="#addtoken-post" class="toc-h2 toc-link" data-title="addToken POST">addToken <span style="float: right; color:#0f70ec;font-size: 9px;">POST</span></a>
+                  </li>
+                  <li>
+                    <a href="#gettoken-get" class="toc-h2 toc-link" data-title="getToken GET">getToken <span style="float: right; color:#029702;font-size: 9px;">GET</span></a>
+                  </li>
+                  <li>
+                    <a href="#gettokendetail-get" class="toc-h2 toc-link" data-title="getTokenDetail GET">getTokenDetail <span style="float: right; color:#029702;font-size: 9px;">GET</span></a>
                   </li>
               </ul>
           </li>
@@ -383,11 +389,24 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduccion'>Introduccion</h1>
-<p>Bienvenidos a la API de Kashpay, donde encontraras servicios web para uso de las APIS  que conforman el entorno Kashpay. </p>
+<p>Bienvenidos a la documentacion de las APIS de Kashpay, donde encontraras los servicios web para uso de las mismas que conforman nuestros desarrollos. </p>
+
+<p>Las APIS que conforman el entorno Kashpay son:</p>
+
+<ul>
+  <li>API AUTENTICACION</li>
+  <li>API ADQUIRENCIA</li>
+  <li>API EMISION</li>
+  <li>API OKPAY</li>
+  <li>API ENTITIES</li>
+  <li>API CARD</li>
+</ul>
 
 <p>Nuestros servicios estan diseñados con la estructura RESTful. Los request y response se presentan en  formato JSON.</p>
 
-<p>Para poder hacer uso de los siguientes servicios, es necesario llenar el siguiente  formulario para poder registrarlo en nuestro sistema y generar credenciales de  operación. </p>
+<aside class="notice">
+Si tiene alguna duda específica con el desarrollo o la integración, puede enviar un correo electrónico a soporte@onsigna.com y a través del canal de soporte responderemos a sus solicitudes. 
+</aside>
 <h1 id='autenticacion-post'>Autenticacion <span style="float: right; color:#0f70ec;font-size: 9px;">POST</span></h1>
 <p>Valida credenciales y genera tokenSesion para el consumo de los diferentes servicios.</p>
 <div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// JAVA - Unirest</span>
@@ -1060,7 +1079,7 @@ El envío de dinero nacional se realiza a través del operativo &quot;1 - Transf
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='http-request-4'>HTTP Request</h3>
-<p><code>http://sdbx-sirio.kashplataforma.com/EntitiesServices/addEntity</code></p>
+<p><code>POST http://sdbx-sirio.kashplataforma.com/EntitiesServices/addEntity</code></p>
 <h3 id='query-parameters-4'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -1197,7 +1216,7 @@ http <span class="nt">--follow</span> <span class="nt">--timeout</span> 3600 GET
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='http-request-5'>HTTP Request</h3>
-<p><code>GET   -   http://sdbx-aldebaran.kashplataforma.com/aldbrn/internal/aw/login</code></p>
+<p><code>GET http://sdbx-sirio.kashplataforma.com/EntitiesServices/getBalance</code></p>
 <h3 id='query-parameters-5'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -1214,7 +1233,7 @@ http <span class="nt">--follow</span> <span class="nt">--timeout</span> 3600 GET
 <td>Default value : com.example</td>
 </tr>
 </tbody></table>
-<h2 id='getoperations'>getOperations</h2>
+<h2 id='getoperations-get'>getOperations <span style="float: right; color:#029702;font-size: 9px;">GET</span></h2>
 <p>Servicio para obtener operaciones a nivel cuenta de la Entidad/Subentidad asociada a la entidad maestra </p>
 <div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// JAVA - Unirest</span>
 <span class="nc">Unirest</span><span class="o">.</span><span class="na">setTimeouts</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
@@ -1688,7 +1707,7 @@ http  <span class="nt">--follow</span> <span class="nt">--timeout</span> 3600 GE
 </span></code></pre></div>
 <p>This endpoint retrieves all kittens.</p>
 <h3 id='http-request-6'>HTTP Request</h3>
-<p><code>POST http://sdbx-aldebaran.kashplataforma.com/aldbrn/internal/aw/login</code></p>
+<p><code>GET http://sdbx-sirio.kashplataforma.com/EntitiesServices/getOperations</code></p>
 <h3 id='query-parameters-6'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -1905,28 +1924,151 @@ http  <span class="nt">--follow</span> <span class="nt">--timeout</span> 3600 GE
 <td></td>
 </tr>
 </tbody></table>
-<h1 id='api-cardservices'>API CardServices</h1><h2 id='inicia'>Inicia</h2>
-<p>Valida las credenciales para acceder en la app wallet, permite o deniega el acceso. Una vez que los accesos sean correctos, dicho servicio devuelve los saldos  asignados, así como el estatus, información y la tarjeta asociada a la cuenta. </p>
-<div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// JAVA - Unirest</span>
-</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="c1">// PHP - cURL</span>
-</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="c1"># RUBY - Net::HTTP</span>
+<h1 id='api-cardservices'>API CardServices</h1><h2 id='addtoken-post'>addToken <span style="float: right; color:#0f70ec;font-size: 9px;">POST</span></h2>
+<p>Este punto final tiene como propósito generar un token único asociado a una tarjeta, utilizando para ello tanto los datos explícitos de la tarjeta como la información del titular de la misma.</p>
 
+<p>El token generado es un valor alfanumérico irrepetible que puede emplearse como identificador en el punto final dedicado a la tokenización de cargos. Es importante destacar que el token actúa como un sustituto seguro de los datos
+confidenciales de la tarjeta, proporcionando una capa adicional de protección en las transacciones. </p>
+
+<aside class="success">
+Recuerda — Que el token generado sea almacenado de manera segura, siguiendo las mejores prácticas de seguridad y cumplimiento normativo para evitar cualquier acceso no autorizado o uso indebido.
+</aside>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// JAVA - Unirest</span>
+<span class="nc">Unirest</span><span class="o">.</span><span class="na">setTimeouts</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+<span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Entity-i"</span><span class="o">,</span> <span class="s">"com.onsigna"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"{\n    \"name\": \"Alejandro Rosas T.\",\n    \"card\": \"4152313702741790\",\n    \"expirationDate\": \"06-2029\",\n    \"identifier\": \"SUB165\",\n    \"address\": \"Farenheit\",\n    \"city\": \"Querétaro\",\n    \"locality\": \"Las Palmas\",\n    \"postalCode\": \"90000\",\n    \"email\": \"alerot@gmail.com\",\n    \"phoneNumber\": \"6526543734\"\n}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="c1">// PHP - cURL</span>
+<span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+
+<span class="nb">curl_setopt_array</span><span class="p">(</span><span class="nv">$curl</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="no">CURLOPT_URL</span> <span class="o">=&gt;</span> <span class="s1">'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add'</span><span class="p">,</span>
+  <span class="no">CURLOPT_RETURNTRANSFER</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_ENCODING</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="no">CURLOPT_MAXREDIRS</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="no">CURLOPT_TIMEOUT</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="no">CURLOPT_FOLLOWLOCATION</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTP_VERSION</span> <span class="o">=&gt;</span> <span class="no">CURL_HTTP_VERSION_1_1</span><span class="p">,</span>
+  <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="no">CURLOPT_POSTFIELDS</span> <span class="o">=&gt;</span><span class="s1">'{
+    "name": "Alejandro Rosas T.",
+    "card": "4152313702741790",
+    "expirationDate": "06-2029",
+    "identifier": "SUB165",
+    "address": "Farenheit",
+    "city": "Querétaro",
+    "locality": "Las Palmas",
+    "postalCode": "90000",
+    "email": "alerot@gmail.com",
+    "phoneNumber": "6526543734"
+}'</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg'</span><span class="p">,</span>
+    <span class="s1">'Entity-i: com.onsigna'</span><span class="p">,</span>
+    <span class="s1">'Content-Type: application/json'</span>
+  <span class="p">),</span>
+<span class="p">));</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="p">;</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="c1"># RUBY - Net::HTTP</span>
+<span class="nb">require</span> <span class="s2">"uri"</span>
+<span class="nb">require</span> <span class="s2">"json"</span>
+<span class="nb">require</span> <span class="s2">"net/http"</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">);</span>
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"Authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg"</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"Entity-i"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"com.onsigna"</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"Content-Type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"application/json"</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">dump</span><span class="p">({</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Alejandro Rosas T."</span><span class="p">,</span>
+  <span class="s2">"card"</span><span class="p">:</span> <span class="s2">"4152313702741790"</span><span class="p">,</span>
+  <span class="s2">"expirationDate"</span><span class="p">:</span> <span class="s2">"06-2029"</span><span class="p">,</span>
+  <span class="s2">"identifier"</span><span class="p">:</span> <span class="s2">"SUB165"</span><span class="p">,</span>
+  <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"Farenheit"</span><span class="p">,</span>
+  <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Querétaro"</span><span class="p">,</span>
+  <span class="s2">"locality"</span><span class="p">:</span> <span class="s2">"Las Palmas"</span><span class="p">,</span>
+  <span class="s2">"postalCode"</span><span class="p">:</span> <span class="s2">"90000"</span><span class="p">,</span>
+  <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"alerot@gmail.com"</span><span class="p">,</span>
+  <span class="s2">"phoneNumber"</span><span class="p">:</span> <span class="s2">"6526543734"</span>
+<span class="p">})</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="c1"># PYTHON - http.client
-</span>
+</span><span class="kn">import</span> <span class="nn">http.client</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">HTTPConnection</span><span class="p">(</span><span class="s">"sdbx-antares.kashplataforma.com"</span><span class="p">,</span> <span class="mi">7071</span><span class="p">)</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">({</span>
+  <span class="s">"name"</span><span class="p">:</span> <span class="s">"Alejandro Rosas T."</span><span class="p">,</span>
+  <span class="s">"card"</span><span class="p">:</span> <span class="s">"4152313702741790"</span><span class="p">,</span>
+  <span class="s">"expirationDate"</span><span class="p">:</span> <span class="s">"06-2029"</span><span class="p">,</span>
+  <span class="s">"identifier"</span><span class="p">:</span> <span class="s">"SUB165"</span><span class="p">,</span>
+  <span class="s">"address"</span><span class="p">:</span> <span class="s">"Farenheit"</span><span class="p">,</span>
+  <span class="s">"city"</span><span class="p">:</span> <span class="s">"Querétaro"</span><span class="p">,</span>
+  <span class="s">"locality"</span><span class="p">:</span> <span class="s">"Las Palmas"</span><span class="p">,</span>
+  <span class="s">"postalCode"</span><span class="p">:</span> <span class="s">"90000"</span><span class="p">,</span>
+  <span class="s">"email"</span><span class="p">:</span> <span class="s">"alerot@gmail.com"</span><span class="p">,</span>
+  <span class="s">"phoneNumber"</span><span class="p">:</span> <span class="s">"6526543734"</span>
+<span class="p">})</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg'</span><span class="p">,</span>
+  <span class="s">'Entity-i'</span><span class="p">:</span> <span class="s">'com.onsigna'</span><span class="p">,</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="s">"/CardServices/api/v1/cardToken/add"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># SHELL - httpie</span>
-
+<span class="nb">printf</span> <span class="s1">'{
+    "name": "Alejandro Rosas T.",
+    "card": "4152313702741790",
+    "expirationDate": "06-2029",
+    "identifier": "SUB165",
+    "address": "Farenheit",
+    "city": "Querétaro",
+    "locality": "Las Palmas",
+    "postalCode": "90000",
+    "email": "alerot@gmail.com",
+    "phoneNumber": "6526543734"
+}'</span>| http  <span class="nt">--follow</span> <span class="nt">--timeout</span> 3600 POST <span class="s1">'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add'</span> <span class="se">\</span>
+ Authorization:<span class="s1">'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg'</span> <span class="se">\</span>
+ Entity-i:<span class="s1">'com.onsigna'</span> <span class="se">\</span>
+ Content-Type:<span class="s1">'application/json'</span>
 
 </code></pre></div>
 <blockquote>
 <p>El codigo anterior devuelve un JSON estructurado así:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cardDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"card"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**1790"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mastercard Standard"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cardToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"862621D24D4A9A739E9D715DE44A4259"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint retrieves all kittens.</p>
 <h3 id='http-request-7'>HTTP Request</h3>
-<p><code>POST http://sdbx-aldebaran.kashplataforma.com/aldbrn/internal/aw/login</code></p>
+<p><code>POST http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/add</code></p>
 <h3 id='query-parameters-7'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -1935,16 +2077,304 @@ http  <span class="nt">--follow</span> <span class="nt">--timeout</span> 3600 GE
 </tr>
 </thead><tbody>
 <tr>
-<td>user</td>
-<td>Usuario</td>
+<td>name</td>
+<td>Nombre</td>
 </tr>
 <tr>
-<td>mail</td>
-<td>Correo electronico</td>
+<td>card</td>
+<td>Numero de tarjeta</td>
 </tr>
 <tr>
-<td>password</td>
-<td>Clave asignada</td>
+<td>expirationDate</td>
+<td>expiracion</td>
+</tr>
+<tr>
+<td>identifier</td>
+<td>idsirio</td>
+</tr>
+<tr>
+<td>address</td>
+<td>direccion</td>
+</tr>
+<tr>
+<td>city</td>
+<td>Querétaro</td>
+</tr>
+<tr>
+<td>locality</td>
+<td>Las Palmas</td>
+</tr>
+<tr>
+<td>postalCode</td>
+<td>90000</td>
+</tr>
+<tr>
+<td>email</td>
+<td>test@test.com</td>
+</tr>
+<tr>
+<td>phoneNumber</td>
+<td>6526543734</td>
+</tr>
+</tbody></table>
+<h2 id='gettoken-get'>getToken <span style="float: right; color:#029702;font-size: 9px;">GET</span></h2>
+<p>Este punto final tiene como propósito generar un token único asociado a una tarjeta, utilizando para ello tanto los datos explícitos de la tarjeta como la información del titular de la misma.</p>
+
+<p>El token generado es un valor alfanumérico irrepetible que puede emplearse como identificador en el punto final dedicado a la tokenización de cargos. Es importante destacar que el token actúa como un sustituto seguro de los datos
+confidenciales de la tarjeta, proporcionando una capa adicional de protección en las transacciones. </p>
+
+<aside class="success">
+Recuerda — Que el token generado sea almacenado de manera segura, siguiendo las mejores prácticas de seguridad y cumplimiento normativo para evitar cualquier acceso no autorizado o uso indebido.
+</aside>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// JAVA - Unirest</span>
+<span class="nc">Unirest</span><span class="o">.</span><span class="na">setTimeouts</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+<span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Entity-i"</span><span class="o">,</span> <span class="s">"com.onsigna"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="c1">// PHP - cURL</span>
+<span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+
+<span class="nb">curl_setopt_array</span><span class="p">(</span><span class="nv">$curl</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="no">CURLOPT_URL</span> <span class="o">=&gt;</span> <span class="s1">'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165'</span><span class="p">,</span>
+  <span class="no">CURLOPT_RETURNTRANSFER</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_ENCODING</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="no">CURLOPT_MAXREDIRS</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="no">CURLOPT_TIMEOUT</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="no">CURLOPT_FOLLOWLOCATION</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTP_VERSION</span> <span class="o">=&gt;</span> <span class="no">CURL_HTTP_VERSION_1_1</span><span class="p">,</span>
+  <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s1">'GET'</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg'</span><span class="p">,</span>
+    <span class="s1">'Entity-i: com.onsigna'</span>
+  <span class="p">),</span>
+<span class="p">));</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="p">;</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="c1"># RUBY - Net::HTTP</span>
+<span class="nb">require</span> <span class="s2">"uri"</span>
+<span class="nb">require</span> <span class="s2">"net/http"</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">);</span>
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"Authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg"</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"Entity-i"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"com.onsigna"</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="c1"># PYTHON - http.client
+</span><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">HTTPConnection</span><span class="p">(</span><span class="s">"sdbx-antares.kashplataforma.com"</span><span class="p">,</span> <span class="mi">7071</span><span class="p">)</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg'</span><span class="p">,</span>
+  <span class="s">'Entity-i'</span><span class="p">:</span> <span class="s">'com.onsigna'</span>
+<span class="p">}</span>
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"/CardServices/api/v1/cardToken/getTokens?identifier=SUB165"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># SHELL - httpie</span>
+http <span class="nt">--follow</span> <span class="nt">--timeout</span> 3600 GET <span class="s1">'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165'</span> <span class="se">\</span>
+ Authorization:<span class="s1">'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg'</span> <span class="se">\</span>
+ Entity-i:<span class="s1">'com.onsigna'</span>
+
+</code></pre></div>
+<blockquote>
+<p>El codigo anterior devuelve un JSON estructurado así:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"card"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**7467"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HSBC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cardToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A72F9C3E4D82B6F95EA1678D12BF328F"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"card"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**1864"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BBVA BANCOMER"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cardToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C13D8E6F29B47A5FD921C7A6E35DF984"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"card"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**1790"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BBVA BANCOMER"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cardToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15ABB7F2A5118BFCE65EF19DEADA91C5"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"card"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**1790"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mastercard Standard"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cardToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"862621D24D4A9A739E9D715DE44A4259"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves all kittens.</p>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>GET http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165</code></p>
+<h3 id='query-parameters-8'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Default value : Bearer token</td>
+</tr>
+<tr>
+<td>Entity ( entidad Maestra)</td>
+<td>Default value : com.example</td>
+</tr>
+</tbody></table>
+<h2 id='gettokendetail-get'>getTokenDetail <span style="float: right; color:#029702;font-size: 9px;">GET</span></h2>
+<p>Este punto final tiene como propósito generar un token único asociado a una tarjeta, utilizando para ello tanto los datos explícitos de la tarjeta como la información del titular de la misma.</p>
+
+<p>El token generado es un valor alfanumérico irrepetible que puede emplearse como identificador en el punto final dedicado a la tokenización de cargos. Es importante destacar que el token actúa como un sustituto seguro de los datos
+confidenciales de la tarjeta, proporcionando una capa adicional de protección en las transacciones. </p>
+
+<aside class="success">
+Recuerda — Que el token generado sea almacenado de manera segura, siguiendo las mejores prácticas de seguridad y cumplimiento normativo para evitar cualquier acceso no autorizado o uso indebido.
+</aside>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// JAVA - Unirest</span>
+<span class="nc">Unirest</span><span class="o">.</span><span class="na">setTimeouts</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+<span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Entity-i"</span><span class="o">,</span> <span class="s">"com.onsigna"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="c1">// PHP - cURL</span>
+<span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+
+<span class="nb">curl_setopt_array</span><span class="p">(</span><span class="nv">$curl</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="no">CURLOPT_URL</span> <span class="o">=&gt;</span> <span class="s1">'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165'</span><span class="p">,</span>
+  <span class="no">CURLOPT_RETURNTRANSFER</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_ENCODING</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="no">CURLOPT_MAXREDIRS</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="no">CURLOPT_TIMEOUT</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="no">CURLOPT_FOLLOWLOCATION</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTP_VERSION</span> <span class="o">=&gt;</span> <span class="no">CURL_HTTP_VERSION_1_1</span><span class="p">,</span>
+  <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s1">'GET'</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg'</span><span class="p">,</span>
+    <span class="s1">'Entity-i: com.onsigna'</span>
+  <span class="p">),</span>
+<span class="p">));</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="p">;</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="c1"># RUBY - Net::HTTP</span>
+<span class="nb">require</span> <span class="s2">"uri"</span>
+<span class="nb">require</span> <span class="s2">"net/http"</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">);</span>
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"Authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg"</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"Entity-i"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"com.onsigna"</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="c1"># PYTHON - http.client
+</span><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">HTTPConnection</span><span class="p">(</span><span class="s">"sdbx-antares.kashplataforma.com"</span><span class="p">,</span> <span class="mi">7071</span><span class="p">)</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg'</span><span class="p">,</span>
+  <span class="s">'Entity-i'</span><span class="p">:</span> <span class="s">'com.onsigna'</span>
+<span class="p">}</span>
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"/CardServices/api/v1/cardToken/getTokens?identifier=SUB165"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># SHELL - httpie</span>
+http <span class="nt">--follow</span> <span class="nt">--timeout</span> 3600 GET <span class="s1">'http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165'</span> <span class="se">\</span>
+ Authorization:<span class="s1">'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvbnNpZ25hdGVzdDFAZ21haWwuY29tIiwiZXhwIjoxNzM3NjYzNDc2LCJpYXQiOjE3Mzc2NTc1MDB9.wQwk5pPBkPvMX015ydgttQ5f64fg5BrfVUI7uiNQVt1neiFVvUGIu067a59cJrBtVz4eGGSTxxWW6wtaIlsvpg'</span> <span class="se">\</span>
+ Entity-i:<span class="s1">'com.onsigna'</span>
+
+</code></pre></div>
+<blockquote>
+<p>El codigo anterior devuelve un JSON estructurado así:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"card"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**7467"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HSBC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cardToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A72F9C3E4D82B6F95EA1678D12BF328F"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"card"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**1864"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BBVA BANCOMER"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cardToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C13D8E6F29B47A5FD921C7A6E35DF984"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"card"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**1790"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BBVA BANCOMER"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cardToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15ABB7F2A5118BFCE65EF19DEADA91C5"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"card"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**1790"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mastercard Standard"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cardToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"862621D24D4A9A739E9D715DE44A4259"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves all kittens.</p>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>GET http://sdbx-antares.kashplataforma.com:7071/CardServices/api/v1/cardToken/getTokens?identifier=SUB165</code></p>
+<h3 id='query-parameters-9'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Default value : Bearer token</td>
+</tr>
+<tr>
+<td>Entity ( entidad Maestra)</td>
+<td>Default value : com.example</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
